@@ -27,8 +27,8 @@ def admin():
     return render_template('admin.html', students=students)
 
 @app.route('/student')
-def student(grades, gpa):
-    return render_template('student.html', grades=grades, gpa=gpa)
+def student():
+    return render_template('student.html')
 
 @app.route('/select_a_student')
 def select_a_student():
@@ -129,10 +129,8 @@ def get_grades():
 
     gpa = (sum(grades[0]) + sum(grades[1]))/(len(grades[0]) + len(grades[1]))
 
-    student(grades, gpa)
-
     cur.close
-    return jsonify(json_data)
+    return redirect(url_for('student', grades=grades, gpa=gpa))
 
 
 if __name__ == "__main__":
